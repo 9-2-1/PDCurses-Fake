@@ -1,3 +1,7 @@
+Please visit [fake](fake) to see my works.
+
+---
+
 Welcome to PDCurses!
 ====================
 
