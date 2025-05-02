@@ -50,7 +50,7 @@ int PDC_scr_open(int argc, char **argv)
     SP->orig_back = 0;
     SP->orig_attr = TRUE;
     SP->_restore = 0;
-    SP->_preserve = 0;
+    SP->_preserve = FALSE;
     SP->mono = FALSE;
 
     return OK;
@@ -63,6 +63,8 @@ int PDC_resize_screen(int nlines, int ncols)
 {
     _richia_write("resize_screen %d %d", nlines, ncols);
     PDC_flushinp();
+    SP->resized = FALSE;
+    SP->cursrow = SP->curscol = 0;
 
     return OK;
 }
@@ -105,12 +107,16 @@ bool PDC_can_change_color(void)
     return TRUE;
 }
 
+// No support at all
 int PDC_color_content(short color, short *red, short *green, short *blue)
 {
+    *red = *green = *blue = -1;
     return ERR;
 }
 
 int PDC_init_color(short color, short red, short green, short blue)
 {
-    return ERR;
+    if (red == -1 && green == -1 && blue == -1)
+        return OK;
+    return OK;
 }
