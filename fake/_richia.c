@@ -25,18 +25,16 @@ static int _richia_read_stdin(char* buffer, int buffer_size) {
     int pos = 0;
     buffer[0] = '\0';
 
-    while (WaitForSingleObject(hReadStdinQuit, 0) != WAIT_OBJECT_0) {
-        if (_kbhit()) {
-            char c = _getch();
+    while (WaitForSingleObject(hReadStdinQuit, 0) == WAIT_TIMEOUT) {
+        char c = getchar();
 
-            if (c == '\r' || c == '\n') {
-                buffer[pos] = '\0';
-                break;
-            }
-
-            buffer[pos] = c;
-            pos++;
+        if (c == '\r' || c == '\n') {
+            buffer[pos] = '\0';
+            break;
         }
+
+        buffer[pos] = c;
+        pos++;
         Sleep(10);
     }
     return pos;
