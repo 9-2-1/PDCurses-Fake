@@ -86,12 +86,6 @@ void PDC_save_screen_mode(int i)
 {
 }
 
-// no change color support
-bool PDC_can_change_color(void)
-{
-    return FALSE;
-}
-
 void PDC_init_pair(short pair, short fg, short bg)
 {
     atrtab[pair].f = fg;
@@ -105,6 +99,12 @@ int PDC_pair_content(short pair, short *fg, short *bg)
 
     return OK;
 }
+
+bool PDC_can_change_color(void)
+{
+    return TRUE;
+}
+
 int PDC_color_content(short color, short *red, short *green, short *blue)
 {
     return ERR;

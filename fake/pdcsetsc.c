@@ -63,7 +63,14 @@ void PDC_set_title(const char *title)
 int PDC_set_blink(bool blinkon)
 {
     // not implemented
-    return ERR;
+    if (!SP)
+        return ERR;
+    // The design from the HELL: init COLORS variable in a set_blink callback
+    if (SP->color_started)
+        COLORS = 16;
+    if (blinkon)
+        return ERR;
+    return OK;
 }
 
 int PDC_set_bold(bool boldon)
