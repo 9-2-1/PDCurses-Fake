@@ -29,13 +29,13 @@ bool PDC_check_key(void)
 int PDC_get_key(void)
 {
     int ret;
-    char *reply = _richia_ask_and_wait("get_key mod=%d", SP->return_key_modifiers);
+    char *reply = _richia_ask_and_wait("get_key %d", SP->return_key_modifiers);
     SP->key_modifiers = 0;
     SP->key_code = FALSE;
     int is_keycode;
     if (reply)
     {
-        sscanf(reply, "%d c%d m%lu", &ret, &is_keycode, &SP->key_modifiers);
+        sscanf(reply, "%d %d %lu", &ret, &is_keycode, &SP->key_modifiers);
         _richia_freemsg(reply);
     }
     if (is_keycode != 0)
