@@ -35,7 +35,6 @@ static int _richia_read_stdin(char* buffer, int buffer_size) {
 
         buffer[pos] = c;
         pos++;
-        Sleep(10);
     }
     return pos;
 }
