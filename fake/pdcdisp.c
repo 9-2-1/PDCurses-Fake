@@ -55,9 +55,3 @@ void PDC_blink_text(void)
 {
     // Not Implemented
 }
-
-void PDC_doupdate(void)
-{
-    _richia_write("doupdate");
-    _richia_flush();
-}

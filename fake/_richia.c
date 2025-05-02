@@ -133,6 +133,7 @@ void _richia_write(const char *format, ...)
     EnterCriticalSection(&print_section);
     vprintf(format, args);
     putchar('\n');
+    fflush(stdout);
     LeaveCriticalSection(&print_section);
 }
 
@@ -147,16 +148,9 @@ char *_richia_ask_and_wait(const char *format, ...)
     printf("reqid %d ", reqid);
     vprintf(format, args);
     putchar('\n');
-    LeaveCriticalSection(&print_section);
-    _richia_flush();
-    return _richia_waitreqid(reqid);
-}
-
-void _richia_flush()
-{
-    EnterCriticalSection(&print_section);
     fflush(stdout);
     LeaveCriticalSection(&print_section);
+    return _richia_waitreqid(reqid);
 }
 
 void _richia_freemsg(char *msg)

@@ -15,7 +15,6 @@ void PDC_scr_close(void)
     PDC_LOG(("PDC_scr_close() - called\n"));
 
     _richia_write("scr_close");
-    _richia_flush();
     _richia_close();
 }
 
@@ -34,7 +33,6 @@ int PDC_scr_open(int argc, char **argv)
 
     _richia_init();
     _richia_write("scr_open");
-    _richia_flush();
 
     SP = calloc(1, sizeof(SCREEN));
     if (!SP)
@@ -64,7 +62,6 @@ int PDC_scr_open(int argc, char **argv)
 int PDC_resize_screen(int nlines, int ncols)
 {
     _richia_write("resize_screen %d %d", nlines, ncols);
-    _richia_flush();
     PDC_flushinp();
 
     return OK;
